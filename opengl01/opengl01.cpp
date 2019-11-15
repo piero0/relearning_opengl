@@ -1,9 +1,18 @@
 #include <memory>
 #include <string>
 #include <iostream>
-#include <spdlog/spdlog.h>
-#include <spdlog/sinks/basic_file_sink.h>
+// #include <spdlog/spdlog.h>
+// #include <spdlog/sinks/basic_file_sink.h>
 #include <GLFW/glfw3.h>
+
+// mock spdlog for now
+namespace output {
+    void info(std::string txt) {
+        std::cout << txt << std::endl;
+    }
+}
+
+namespace spdlog = output;
 
 class AppWindow {
     private:
@@ -12,8 +21,8 @@ class AppWindow {
         std::string title;
 
         void init_logging() {
-            spdlog::set_default_logger(spdlog::basic_logger_mt("AppWindow", this->title + ".log"));
-            spdlog::set_level(spdlog::level::info);
+            // spdlog::set_default_logger(spdlog::basic_logger_mt("AppWindow", this->title + ".log"));
+            // spdlog::set_level(spdlog::level::info);
         }
 
         bool init() {

@@ -3,8 +3,8 @@
 using namespace pgfm;
 using namespace std::string_literals;
 
-std::string Renderer::loadShader(std::string path) {
-    std::ifstream file(path);
+std::string BaseRenderer::loadShader(std::string name) {
+    std::ifstream file(this->shadersPath / name);
 
     auto line = ""s;
     auto source = ""s;

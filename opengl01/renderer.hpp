@@ -3,18 +3,22 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <filesystem>
 #include <GL/glew.h>
 
 namespace pgfm
 {
-    class Renderer {
+    class BaseRenderer {
+        protected:
+            std::filesystem::path shadersPath = "shaders";
+
         public:
             virtual void setup() = 0;
             virtual void render() = 0;
-            std::string loadShader(std::string path);
+            std::string loadShader(std::string name);
     };
 
-    class SimpleRenderer: public Renderer {
+    class SimpleRenderer: public BaseRenderer {
         private:
             GLuint shaderProgram;
 

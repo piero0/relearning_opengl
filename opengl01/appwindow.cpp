@@ -39,11 +39,8 @@ bool AppWindow::init() {
     return true;
 }
 
-AppWindow::AppWindow(): 
-    window(nullptr), width(800), height(600), title("AppWindow") {}
-
 AppWindow::AppWindow(std::string Title, int Width, int Height):
-    window(nullptr), width(Width), height(Height), title(Title) {}
+    width(Width), height(Height), title(Title) {}
 
 AppWindow::~AppWindow() {
     if(this->window) {
@@ -52,10 +49,6 @@ AppWindow::~AppWindow() {
     }
     glfwTerminate();
     spdlog::info("GLFW terminated");
-}
-
-void AppWindow::setRenderer(std::unique_ptr<Renderer> renderer) {
-    this->renderer = std::move(renderer);
 }
 
 void AppWindow::main() {

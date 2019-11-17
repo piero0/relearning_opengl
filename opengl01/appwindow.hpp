@@ -13,20 +13,23 @@
 namespace pgfm {
     class AppWindow {
         private:
-            GLFWwindow* window;
-            int width, height;
-            std::string title;
-            std::unique_ptr<Renderer> renderer;
+            GLFWwindow* window = nullptr;
+            int width = 800, height = 600;
+            std::string title = "AppWindow";
+            std::unique_ptr<BaseRenderer> renderer;
 
             void init_logging();
             bool init();
 
         public:
-            AppWindow();
+            AppWindow() = default;
             AppWindow(std::string Title, int Width, int Height);
             ~AppWindow();
 
             void main();
-            void setRenderer(std::unique_ptr<Renderer> renderer);
+
+            template<class T> void setRendererClass() {
+                this->renderer = std::make_unique<T>();
+            }
     };
 }

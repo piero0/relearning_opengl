@@ -2,6 +2,6 @@
 
 int main() {
     auto app = pgfm::AppWindow("OpenGL01", 800, 600);
-    app.setRenderer(std::make_unique<pgfm::SimpleRenderer>());
+    app.setRendererClass<pgfm::SimpleRenderer>();
     app.main();
 }

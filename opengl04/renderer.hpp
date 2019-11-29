@@ -15,22 +15,22 @@ class SimpleRenderer: public pgfm::BaseRenderer {
         unsigned char* tex_data = nullptr;
 
         GLfloat verts[8] = {                
-            -1.0f, 1.0f,
-            -1.0f, -1.0f,
-            1.0f, -1.0f,
-            1.0f, 1.0f,
+            -0.75f, -0.75f,
+            0.75f, -0.75f,
+            -0.75f, 0.75f,
+            0.75f, 0.75f,
         };
 
         GLfloat uv[8] {
-            0.0f, 1.0f,
             0.0f, 0.0f,
             1.0f, 0.0f,
+            0.0f, 1.0f,
             1.0f, 1.0f,
         };
 
         GLuint indexes[6] {
             0, 1, 2,
-            0, 2, 3,
+            2, 1, 3,
         };
 
         float r = 0.7f, g = 0.f, b = 0.f;

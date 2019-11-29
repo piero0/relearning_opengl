@@ -66,6 +66,7 @@ void SimpleRenderer::setupArrays() {
 
 void SimpleRenderer::setupTexture() {
     int width, height, channels;
+    stbi_set_flip_vertically_on_load(true);
     this->tex_data = stbi_load("imgs/brick.jpg", &width, &height, &channels, 0);
 
     spdlog::info("Texture size: {0}x{1}", width, height);
@@ -74,6 +75,8 @@ void SimpleRenderer::setupTexture() {
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, this->tex[0]);
+
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1); //why and how?
 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, this->tex_data);
     glGenerateMipmap(GL_TEXTURE_2D);

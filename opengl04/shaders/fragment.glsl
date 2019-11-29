@@ -1,11 +1,9 @@
 #version 460
 
+in vec2 tc;
+layout ( binding = 0 ) uniform sampler2D sampl;
 layout ( location = 0 ) out vec4 color;
-uniform vec3 rgb;
 
 void main() { 
-    if(gl_PrimitiveID < 1)
-        color = vec4(rgb, 1.0);
-    else
-        color = vec4(0.0, 1.0, 0.0, 1.0);
+    color = texture(sampl, tc);
 }

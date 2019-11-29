@@ -10,7 +10,7 @@ add_executable(opengl04)
 cmake_policy(SET CMP0076 NEW)
 target_sources(opengl04 PUBLIC opengl04.cpp renderer.cpp)
 
-target_include_directories(opengl04 PUBLIC ../pgfm/)
+target_include_directories(opengl04 PUBLIC ../pgfm/ ../libs)
 target_compile_features(opengl04 PUBLIC cxx_std_17)
 
 find_package(spdlog REQUIRED PATHS /usr/local/lib)

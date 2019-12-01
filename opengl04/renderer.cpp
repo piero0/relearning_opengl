@@ -3,13 +3,6 @@
 #include <spdlog/spdlog.h>
 #include <iostream>
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
-
-SimpleRenderer::~SimpleRenderer() {
-    stbi_image_free(this->tex_data);
-}
-
 void SimpleRenderer::setupShadersPipeline() {
     auto src = pgfm::Util::loadShader("shaders/vertexTriangle.glsl");
     const char* vertex_shader = src.c_str();
@@ -65,20 +58,18 @@ void SimpleRenderer::setupArrays() {
 }
 
 void SimpleRenderer::setupTexture() {
-    int width, height, channels;
-    stbi_set_flip_vertically_on_load(true);
-    this->tex_data = stbi_load("imgs/brick.jpg", &width, &height, &channels, 0);
+    this->texObj.load("imgs/brick.jpg");
 
-    spdlog::info("Texture size: {0}x{1}", width, height);
+    spdlog::info("Texture size: {0}x{1}", this->texObj.width, this->texObj.height);
 
     glGenTextures(1, &this->tex[0]);
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, this->tex[0]);
 
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 1); //why and how?
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, this->tex_data);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, this->texObj.width, this->texObj.height, 0, GL_RGB, GL_UNSIGNED_BYTE, this->texObj.imageData);
     glGenerateMipmap(GL_TEXTURE_2D);
 
     spdlog::info("Textures set up");

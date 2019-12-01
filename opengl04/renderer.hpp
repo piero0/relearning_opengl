@@ -1,7 +1,6 @@
 #pragma once
+#include "util.hpp"
 #include "baserenderer.hpp"
-
-
 
 class SimpleRenderer: public pgfm::BaseRenderer {
     private:
@@ -12,7 +11,7 @@ class SimpleRenderer: public pgfm::BaseRenderer {
         GLuint pip[1] = {0};
         GLuint tex[1] = {0};
 
-        unsigned char* tex_data = nullptr;
+        pgfm::Image texObj;
 
         GLfloat verts[8] = {                
             -0.75f, -0.75f,
@@ -38,7 +37,7 @@ class SimpleRenderer: public pgfm::BaseRenderer {
 
     public:
         SimpleRenderer() = default;
-        ~SimpleRenderer();
+        ~SimpleRenderer() = default;
 
         void setupShaders();
         void setupShadersPipeline();

@@ -9,6 +9,7 @@ option(BUILD_SHARED_LIBS "so" ON)
 
 cmake_policy(SET CMP0076 NEW)
 target_sources(pgfm PUBLIC appwindow.cpp util.cpp)
+target_include_directories(pgfm PUBLIC ../libs)
 
 find_package(spdlog REQUIRED PATHS /usr/local/lib)
 
